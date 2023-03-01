@@ -1,5 +1,5 @@
 import { hashSync } from "bcryptjs";
-import { z } from "zod";
+import { z, ZodTypeAny } from "zod";
 
 const create = z.object({
     name: z.string().min(3).max(45),
@@ -13,11 +13,14 @@ const removePwd = create.omit({
 }).merge(z.object({
     createAt: z.date(),
     updateAt: z.date().nullish(),
-    deleteAt: z.date().or(z.string()).nullish()
+    deleteAt: z.date().or(z.string()).nullish(),
+    id: z.number().positive()
 }));
 
+const update = create.partial().omit({ admin: true });
 
 export default {
     create,
+    update,
     removePwd
 }

@@ -7,7 +7,7 @@ const app: Application = express();
 app.use(express.json());
 
 app.use("/users", routes.user);
-
+app.use("/login", routes.session);
 
 
 app.use(handleErrors);

@@ -14,5 +14,7 @@ export async function idValid(req: Request, res: Response, next: NextFunction): 
 
     if (!findId) throw new AppError(`Not found`, 409);
 
+    req.id = id;
+
     return next();
 }

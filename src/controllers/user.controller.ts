@@ -14,7 +14,21 @@ async function read(req: Request, res: Response): Promise<Response> {
     return res.status(200).json(users);
 }
 
+async function update(req: Request, res: Response): Promise<Response> {
+    const user: iUserWithoutPwd = await services.update(req.id!, req.userToken!, req.body);
+    //Talvez tenha de mudar o status
+    return res.status(201).json(user);
+}
+
+async function remove(req: Request, res: Response): Promise<Response> {
+    await services.remove(req.id!);
+
+    return res.status(204).json();
+}
+
 export default {
     create,
-    read
+    read,
+    remove,
+    update
 }
