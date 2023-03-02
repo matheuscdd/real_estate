@@ -1,6 +1,6 @@
 import { iUserWithoutPwd } from "../interfaces"
 import { Request, Response } from "express";
-import services from "../services/users";
+import services from "../services/user";
 
 async function create(req: Request, res: Response): Promise<Response> {
     const user: iUserWithoutPwd = await services.create(req.body);

@@ -14,7 +14,7 @@ const removePwd = create.omit({
     createAt: z.date(),
     updateAt: z.date().nullish(),
     deleteAt: z.date().or(z.string()).nullish(),
-    id: z.number().positive()
+    id: z.number().positive().int()
 }));
 
 const update = create.partial().omit({ admin: true });

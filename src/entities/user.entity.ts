@@ -25,7 +25,7 @@ export class User {
     @Column({ type: "varchar", length: 120 })
     password: string;
 
-    @CreateDateColumn() //Não consegui mudar
+    @CreateDateColumn()
     createAt: string;
 
     @UpdateDateColumn()

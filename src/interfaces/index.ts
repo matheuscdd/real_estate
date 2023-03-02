@@ -10,7 +10,14 @@ import {
     iToken
 } from "./session.interface";
 
+import {
+    iCategoryCreate,
+    iCategoryRepo
+} from "./category.interface";
+
 export {
+    iCategoryCreate,
+    iCategoryRepo,
     iUserCreate,
     iUserUpdate,
     iUserRepo,
