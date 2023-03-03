@@ -2,8 +2,6 @@ import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import { iUserCreate, iUserRepo, iUserWithoutPwd } from "../../interfaces";
 import schemas from "../../schemas";
-import { z } from "zod";
-
 
 export async function create(payload: iUserCreate): Promise<iUserWithoutPwd> {
     const userRepository: iUserRepo = AppDataSource.getRepository(User);

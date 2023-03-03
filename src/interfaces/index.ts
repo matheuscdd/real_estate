@@ -15,6 +15,16 @@ import {
     iCategoryRepo
 } from "./category.interface";
 
+import {
+    iRealEstateCreate,
+    iRealEstateRepo
+} from "./realEstate.interface";
+
+import {
+    iAddressRepo,
+    iAddressCreate
+} from "./address.interface";
+
 export {
     iCategoryCreate,
     iCategoryRepo,
@@ -23,5 +33,9 @@ export {
     iUserRepo,
     iUserWithoutPwd,
     iLogin,
-    iToken
+    iToken,
+    iRealEstateCreate,
+    iRealEstateRepo,
+    iAddressRepo,
+    iAddressCreate
 }
