@@ -7,5 +7,6 @@ export async function remove(id: number): Promise<void> {
 
     const user: User | null = await userRepository.findOneBy({ id });
     //Pode ser o outro soft
+    
     await userRepository.softRemove(user!);
 }

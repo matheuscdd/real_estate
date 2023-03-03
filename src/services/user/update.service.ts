@@ -5,7 +5,7 @@ import { AppError } from "../../errors";
 import schemas from "../../schemas";
 
 export async function update(id: number, userToken: iUserWithoutPwd, newUserData: iUserUpdate): Promise<iUserWithoutPwd> {
-    if (!userToken.admin && userToken.id !== id) throw new AppError(`Insufficient Permission`, 403);
+    if (!userToken.admin && userToken.id !== id) throw new AppError(`Insufficient permission`, 403);
     
     const userRepository: iUserRepo = AppDataSource.getRepository(User);
     

@@ -13,7 +13,7 @@ export async function emailValid(req: Request, res: Response, next: NextFunction
 
     const findEmail: User | null = await userRepository.findOneBy({ email });
     
-    if (findEmail) throw new AppError(`Email already existis.`, 409);
+    if (findEmail) throw new AppError(`Email already exists`, 409);
 
     return next();
 }

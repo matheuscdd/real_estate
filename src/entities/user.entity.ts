@@ -1,10 +1,13 @@
+import { getRounds, hashSync } from "bcryptjs";
 import {
     Entity,
     Column,
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
-    DeleteDateColumn
+    DeleteDateColumn,
+    BeforeInsert,
+    BeforeUpdate
 } from "typeorm";
 
 @Entity("users")
@@ -26,13 +29,23 @@ export class User {
     password: string;
 
     @CreateDateColumn()
-    createAt: string;
+    createdAt: string;
 
     @UpdateDateColumn()
-    updateAt: string;
+    updatedAt: string;
 
     @DeleteDateColumn()
-    deleteAt: string;
+    deletedAt: string;
+
+    
+    @BeforeUpdate()
+    @BeforeInsert()
+    hashPassword() {
+        const isEncrypted: number = getRounds(this.password);
+        if (!isEncrypted) this.password = hashSync(this.password, 10);
+    }
+
 
 }
+
 

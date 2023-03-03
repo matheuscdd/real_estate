@@ -11,14 +11,14 @@ export async function login(payload: iLogin): Promise<iToken> {
 
     const findUser: User | null = await userRepository.findOneBy({ email: payload.email });
     //Ficar esperto com o usuário deletado
-    if(!findUser) throw new AppError(`Invalid email or password`, 401);
+    if(!findUser) throw new AppError(`Invalid credentials`, 401);
 
     const pwdMatch: boolean = await compare(payload.password, findUser.password);
     
-    if (!pwdMatch) throw new AppError(`Invalid email or password`, 401);
-
+    if (!pwdMatch) throw new AppError(`Invalid credentials`, 401);
+    
     const token: string = sign(
-        { email: payload.email },
+        { id: findUser.id },
         String(process.env.SECRET_KEY),
         { expiresIn: "24H", subject: String(findUser.id) }
     );

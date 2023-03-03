@@ -9,7 +9,7 @@ import schemas from "../schemas";
 export async function tokenValid(req: Request, res: Response, next: NextFunction): Promise<void> {
     let token: string = req.headers.authorization!;
 
-    if (!token) throw new AppError(`Missing authorization token`, 401);
+    if (!token) throw new AppError(`Missing bearer token`, 401);
 
     token = token.split(" ")[1];
 
@@ -19,13 +19,13 @@ export async function tokenValid(req: Request, res: Response, next: NextFunction
 
         const userRepository: iUserRepo = AppDataSource.getRepository(User);
 
-        const findUser: User | null = await userRepository.findOneBy({ email: decoded.email });
+        const findUser: User | null = await userRepository.findOneBy({ id: Number(decoded.sub) });
 
         if (!findUser) throw new AppError(`Invalid token`, 401);
 
         req.userToken = schemas.user.removePwd.parse(findUser);
     }
-
+    
     await verify(token, String(process.env.SECRET_KEY), check);
 
     return next();
