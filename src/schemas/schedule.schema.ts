@@ -1,4 +1,5 @@
 import { z } from "zod";
+import user from "./user.schema";
 
 const create = z.object({
     date: z.string(),
@@ -6,6 +7,14 @@ const create = z.object({
     realEstateId: z.number().positive().int()
 });
 
+const list = create.omit({
+    realEstateId: true
+}).extend({
+    id: z.number(),
+    user: user.removePwd
+}).array();
+
 export default {
-    create
+    create,
+    list
 }

@@ -18,7 +18,6 @@ category.post("",
     middleware.dataValid(schemas.category.create), 
     middleware.nameValidCategory, 
     middleware.tokenValid, 
-    middleware.userTokenValid,
     middleware.adminValid, 
     controllers.category.create
 );

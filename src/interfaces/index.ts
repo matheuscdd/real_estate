@@ -28,7 +28,7 @@ import {
 import {
     iScheduleCreate,
     iScheduleRepo,
-    iScheduleSuccess
+    iScheduleSuccess,
 } from "./schedule.interface";
 
 export {

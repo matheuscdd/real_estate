@@ -7,7 +7,6 @@ export const schedule: Router = Router();
 
 schedule.get("/realEstate/:id", 
     middleware.tokenValid, 
-    middleware.userTokenValid,
     middleware.adminValid, 
     controllers.schedule.find
 );

@@ -15,7 +15,7 @@ export async function create(payload: iRealEstateCreate): Promise<RealEstate> {
       ...rest
     });
     
-    if (findAddress) throw new AppError(`Address already exists`);
+    if (findAddress) throw new AppError(`Address already exists`, 409);
     
     const address: Address = addressRepository.create(payload.address);
     await addressRepository.save(address);

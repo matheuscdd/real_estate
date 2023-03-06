@@ -1,12 +1,13 @@
 import { AppDataSource } from "../../data-source";
-import { RealEstate } from "../../entities";
+import { RealEstate, Schedule } from "../../entities";
 import { AppError } from "../../errors";
 import { iRealEstateRepo } from "../../interfaces";
+import schemas from "../../schemas";
 
 export async function find(id: number) {
     const realEstateRepository: iRealEstateRepo = AppDataSource.getRepository(RealEstate);
 
-    const realEstate = realEstateRepository.findOne({
+    const realEstate = await realEstateRepository.findOne({
         where: {
             id
         },
@@ -18,8 +19,9 @@ export async function find(id: number) {
             category: true
         }
     });
+
     
     if (!realEstate) throw new AppError(`RealEstate not found`, 404);
 
-    return realEstate
+    return realEstate;
 }
