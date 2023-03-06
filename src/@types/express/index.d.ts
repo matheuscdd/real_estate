@@ -7,6 +7,7 @@ declare global {
             id?: number;
             userToken?: iUserWithoutPwd;
             admin?: boolean;
+            idToken?: number;
         }
     }
 }

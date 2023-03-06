@@ -21,9 +21,12 @@ export class Schedule {
     @Column({ type: "time" })
     hour: string;
 
-    @ManyToOne(() => RealEstate)
-    @JoinTable()
+    @ManyToOne(() => RealEstate, (realEstate) => realEstate.schedules)
     realEstate: RealEstate;
+
+    // @ManyToOne(() => RealEstate)
+    // @JoinTable()
+    // realEstate: RealEstate;
 
     @ManyToOne(() => User)
     @JoinTable()

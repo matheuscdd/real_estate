@@ -5,4 +5,15 @@ import schemas from "../schemas";
 
 export const schedule: Router = Router();
 
-schedule.post("", middleware.tokenValid, middleware.dataValid(schemas.schedule.create), controllers.schedule.create);
+schedule.get("/realEstate/:id", 
+    middleware.tokenValid, 
+    middleware.userTokenValid,
+    middleware.adminValid, 
+    controllers.schedule.find
+);
+
+schedule.post("", 
+    middleware.tokenValid, 
+    middleware.dataValid(schemas.schedule.create), 
+    controllers.schedule.create
+);

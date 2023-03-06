@@ -28,14 +28,14 @@ export class User {
     @Column({ type: "varchar", length: 120 })
     password: string;
 
-    @CreateDateColumn()
-    createdAt: Date;
+    @CreateDateColumn({ type: "date" })
+    createdAt: string;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+    @UpdateDateColumn({ type: "date" })
+    updatedAt: string;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
+    @DeleteDateColumn({ type: "date" })
+    deletedAt: string | null;
     
     @BeforeUpdate()
     @BeforeInsert()

@@ -1,10 +1,9 @@
 import { AppDataSource } from "../../data-source";
-import { Category, RealEstate } from "../../entities";
-import { iCategoryRepo, iRealEstateRepo } from "../../interfaces";
+import { Category } from "../../entities";
+import { iCategoryRepo } from "../../interfaces";
 
 export async function find(id: number)/*: Promise<RealEstate[]> */{
     const categoryRepository: iCategoryRepo = AppDataSource.getRepository(Category);
-    // const realEstate: iRealEstateRepo = AppDataSource.getRepository(RealEstate);
 
     const results = categoryRepository.findOne({
         where: {
@@ -14,6 +13,8 @@ export async function find(id: number)/*: Promise<RealEstate[]> */{
             realEstate: true
         }
     });
+
+    //Talvez ter de fazer uma validação aqui
 
     return results;
 }

@@ -10,9 +10,9 @@ const create = z.object({
 const removePwd = create.omit({
     password: true
 }).merge(z.object({
-    createdAt: z.date(),
-    updatedAt: z.date().nullish(),
-    deletedAt: z.date().or(z.string()).nullish(),
+    createdAt: z.string(),
+    updatedAt: z.string().nullish(),
+    deletedAt: z.string().nullish(),
     id: z.number().positive().int()
 }));
 

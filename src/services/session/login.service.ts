@@ -5,7 +5,6 @@ import { User } from "../../entities";
 import { AppError } from "../../errors";
 import { iLogin, iToken, iUserRepo } from "../../interfaces";
 
-
 export async function login(payload: iLogin): Promise<iToken> {
     const userRepository: iUserRepo = AppDataSource.getRepository(User);
 

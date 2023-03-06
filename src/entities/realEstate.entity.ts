@@ -12,6 +12,7 @@ import {
 import { boolean } from "zod";
 import { Address } from "./address.entity";
 import { Category } from "./category.entity";
+import { Schedule } from "./schedule.entity";
 
 @Entity("real_estate")
 export class RealEstate {
@@ -28,19 +29,21 @@ export class RealEstate {
     @Column({ type: "int" })
     size: number;
 
-    @CreateDateColumn()
-    createdAt: Date;
+    @CreateDateColumn({ type: "date" })
+    createdAt: string;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+    @UpdateDateColumn({ type: "date" })
+    updatedAt: string;
 
-    @OneToOne(() => Address) //Aqui indico de quem receberá a chave estrangeira
-    @JoinColumn() //Aqui deixo claro que a relação é unidirecional
-    address: Address //Não é preciso passar o sufixo id, pois ele coloca sozinho
-    //Tipo com a própria entidade dona dele
-
+    @OneToOne(() => Address)
+    @JoinColumn() 
+    address: Address 
+    
     @ManyToOne(() => Category, (category) => category.realEstate)
     category: Category;
+    
+    @OneToMany(() => Schedule, (schedule) => schedule.realEstate)
+    schedules: Schedule[];
 
 }
 
