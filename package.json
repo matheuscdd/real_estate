@@ -19,7 +19,8 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "test": "jest --verbose --runInBand",
     "revertdb": "yarn typeorm migration:revert -d src/data-source.ts",
-    "updatedb": "yarn typeorm migration:run -d src/data-source.ts"
+    "updatedb": "yarn typeorm migration:run -d src/data-source.ts",
+    "mig": "yarn typeorm migration:generate src/migrations/generate -d src/data-source.ts"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

@@ -6,6 +6,7 @@ import routes from "./routes";
 const app: Application = express();
 app.use(express.json());
 
+app.use("/schedules", routes.schedule);
 app.use("/users", routes.user);
 app.use("/login", routes.session);
 app.use("/categories", routes.category);

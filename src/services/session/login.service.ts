@@ -18,7 +18,7 @@ export async function login(payload: iLogin): Promise<iToken> {
     if (!pwdMatch) throw new AppError(`Invalid credentials`, 401);
     
     const token: string = sign(
-        { id: findUser.id },
+        { admin: findUser.admin },
         String(process.env.SECRET_KEY),
         { expiresIn: "24H", subject: String(findUser.id) }
     );

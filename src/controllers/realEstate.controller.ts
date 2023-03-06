@@ -8,7 +8,14 @@ async function create(req: Request, res: Response): Promise<Response> {
     return res.status(201).json(realEstate);
 }
 
+async function read(req: Request, res: Response): Promise<Response> {
+    const realEstates: RealEstate[] = await services.read();
+
+    return res.status(200).json(realEstates);
+}
+
 export default {
-    create
+    create,
+    read
 }
 

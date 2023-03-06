@@ -14,7 +14,14 @@ async function read(req: Request, res: Response): Promise<Response> {
     return res.status(200).json(categories)
 }
 
+async function find(req: Request, res: Response): Promise<Response> {
+    const categories = await services.find(req.id!);
+
+    return res.status(200).json(categories);
+}
+
 export default {
     create,
-    read
+    read,
+    find
 }

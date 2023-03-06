@@ -6,6 +6,7 @@ declare global {
         interface Request {
             id?: number;
             userToken?: iUserWithoutPwd;
+            admin?: boolean;
         }
     }
 }

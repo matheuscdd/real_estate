@@ -1,8 +1,13 @@
 import {
     Entity,
     Column,
-    PrimaryGeneratedColumn
+    PrimaryGeneratedColumn,
+    ManyToMany,
+    JoinTable,
+    ManyToOne
 } from "typeorm";
+import { RealEstate } from "./realEstate.entity";
+import { User } from "./user.entity";
 
 @Entity("schedules_users_properties")
 export class Schedule {
@@ -11,11 +16,17 @@ export class Schedule {
     id: number;
 
     @Column({ type: "date" })
-    date: string;
+    date: string | Date;
 
     @Column({ type: "time" })
     hour: string;
 
-    //Faltou as fks
+    @ManyToOne(() => RealEstate)
+    @JoinTable()
+    realEstate: RealEstate;
+
+    @ManyToOne(() => User)
+    @JoinTable()
+    user: User;
 
 }

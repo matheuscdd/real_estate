@@ -5,10 +5,13 @@ import {
     UpdateDateColumn,
     PrimaryGeneratedColumn,
     OneToOne,
-    JoinColumn
+    JoinColumn,
+    OneToMany,
+    ManyToOne
 } from "typeorm";
 import { boolean } from "zod";
 import { Address } from "./address.entity";
+import { Category } from "./category.entity";
 
 @Entity("real_estate")
 export class RealEstate {
@@ -26,15 +29,18 @@ export class RealEstate {
     size: number;
 
     @CreateDateColumn()
-    createdAt: string;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updatedAt: string;
+    updatedAt: Date;
 
     @OneToOne(() => Address) //Aqui indico de quem receberá a chave estrangeira
     @JoinColumn() //Aqui deixo claro que a relação é unidirecional
     address: Address //Não é preciso passar o sufixo id, pois ele coloca sozinho
     //Tipo com a própria entidade dona dele
+
+    @ManyToOne(() => Category, (category) => category.realEstate)
+    category: Category;
 
 }
 

@@ -15,6 +15,8 @@ export function idValidCategory(where: "body" | "params") {
         
         if (!category) throw new AppError(`Category not found`, 404);
     
+        req.id = id;
+
         return next();
     }
 } 

@@ -29,14 +29,13 @@ export class User {
     password: string;
 
     @CreateDateColumn()
-    createdAt: string;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updatedAt: string;
+    updatedAt: Date;
 
     @DeleteDateColumn()
-    deletedAt: string;
-
+    deletedAt: Date;
     
     @BeforeUpdate()
     @BeforeInsert()
@@ -44,7 +43,6 @@ export class User {
         const isEncrypted: number = getRounds(this.password);
         if (!isEncrypted) this.password = hashSync(this.password, 10);
     }
-
 
 }
 

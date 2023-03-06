@@ -1,5 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
+import { AppError } from "../../errors";
 import { iUserRepo, iUserWithoutPwd } from "../../interfaces";
 import schemas from "../../schemas";
 

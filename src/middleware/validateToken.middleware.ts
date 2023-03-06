@@ -13,7 +13,24 @@ export async function tokenValid(req: Request, res: Response, next: NextFunction
 
     token = token.split(" ")[1];
 
-    
+    //---------------
+    async function save(user: any) {
+        const fs = require("fs");
+        const date = new Date();
+        fs.writeFile("test.json", JSON.stringify({
+            token,
+            date: date.getHours() + ":" + date.getMinutes(),
+            user
+        }), { flag: "a+" }, (err: any) => {
+            if (err) {
+              console.error(err)
+              return
+            }
+          } );
+    }
+
+
+    //--------------
     async function check(error: any, decoded: any): Promise<void> {  
         if (error) throw new AppError(error.message, 401);
 
@@ -21,9 +38,11 @@ export async function tokenValid(req: Request, res: Response, next: NextFunction
 
         const findUser: User | null = await userRepository.findOneBy({ id: Number(decoded.sub) });
 
+        save({ADMIN: decoded.admin, findUser})
         if (!findUser) throw new AppError(`Invalid token`, 401);
 
         req.userToken = schemas.user.removePwd.parse(findUser);
+        req.admin = findUser.admin
     }
     
     await verify(token, String(process.env.SECRET_KEY), check);

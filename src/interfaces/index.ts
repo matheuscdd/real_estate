@@ -25,7 +25,14 @@ import {
     iAddressCreate
 } from "./address.interface";
 
+import {
+    iScheduleCreate,
+    iScheduleRepo,
+    iScheduleSuccess
+} from "./schedule.interface";
+
 export {
+    iScheduleSuccess,
     iCategoryCreate,
     iCategoryRepo,
     iUserCreate,
@@ -37,5 +44,7 @@ export {
     iRealEstateCreate,
     iRealEstateRepo,
     iAddressRepo,
-    iAddressCreate
+    iAddressCreate,
+    iScheduleCreate,
+    iScheduleRepo
 }

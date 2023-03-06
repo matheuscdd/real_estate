@@ -6,4 +6,5 @@ import schemas from "../schemas";
 export const category: Router = Router();
 
 category.get("", controllers.category.read);
-category.post("", middleware.tokenValid, middleware.adminValid, middleware.dataValid(schemas.category.create), controllers.category.create);
+category.get("/:id/realEstate", middleware.idValidCategory("params"), controllers.category.find);
+category.post("", middleware.dataValid(schemas.category.create), middleware.nameValidCategory, middleware.tokenValid, middleware.adminValid, controllers.category.create);
