@@ -30,25 +30,33 @@ export async function create(payload: iScheduleCreate, userId: number): Promise<
     const findRealEstateSchedules = await scheduleRepository.createQueryBuilder("schedule")
         .select()
         .where("schedule.realEstateId = :realEstate", { realEstate: payload.realEstateId })
-        .andWhere("schedule.date = :date", { date })
+        .andWhere("schedule.date = :date", { date: payload.date })
         .andWhere("schedule.hour = :hour", { hour })
         .getOne()
 
-    // save(findRealEstateSchedules)    
-    console.log(findRealEstateSchedules)
+
     if (findRealEstateSchedules) throw new AppError(`Schedule to this real estate at this date and time already exists`, 409);
         
 
     const findUserSchedules = await scheduleRepository.createQueryBuilder("schedule")
         .select()
         .where("schedule.userId = :user", { user: userId })
-        .andWhere("schedule.date = :date", { date })
+        .andWhere("schedule.date = :date", { date: payload.date })
         .andWhere("schedule.hour = :hour", { hour })
         .getOne()
     
-    
-    // save(findUserSchedules)
-    if (findUserSchedules !== null) throw new AppError(`User schedule to this real estate at this date and time already exists`, 409);
+    const tot = await scheduleRepository.createQueryBuilder("schedule")
+        .select()
+        .innerJoinAndSelect("schedule.realEstate", "real")
+        .innerJoinAndSelect("schedule.user", "user")
+        .getMany()
+        
+        
+    if (findUserSchedules) throw new AppError(`User schedule to this real estate at this date and time already exists`, 409);
+
+ 
+
+
     const schedule = await scheduleRepository.createQueryBuilder()
         .insert()
         .into(Schedule)
@@ -60,21 +68,7 @@ export async function create(payload: iScheduleCreate, userId: number): Promise<
         })
         .execute()
 
-    save(schedule)
     const success: iScheduleSuccess = { message: 'Schedule created' };
     return success;
 }
 
-function save(data: any) {
-    const fs = require("fs");
-    const time = new Date();
-    fs.writeFile("test.json", JSON.stringify({
-        time: time.getHours() + ":" + time.getMinutes(),
-        data
-    }), { flag: "a+" }, (err: any) => {
-        if (err) {
-          console.error(err)
-          return
-        }
-      } );
-}
