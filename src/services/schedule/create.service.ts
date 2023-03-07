@@ -36,7 +36,6 @@ export async function create(payload: iScheduleCreate, userId: number): Promise<
 
 
     if (findRealEstateSchedules) throw new AppError(`Schedule to this real estate at this date and time already exists`, 409);
-        
 
     const findUserSchedules = await scheduleRepository.createQueryBuilder("schedule")
         .select()
@@ -45,19 +44,10 @@ export async function create(payload: iScheduleCreate, userId: number): Promise<
         .andWhere("schedule.hour = :hour", { hour })
         .getOne()
     
-    const tot = await scheduleRepository.createQueryBuilder("schedule")
-        .select()
-        .innerJoinAndSelect("schedule.realEstate", "real")
-        .innerJoinAndSelect("schedule.user", "user")
-        .getMany()
-        
         
     if (findUserSchedules) throw new AppError(`User schedule to this real estate at this date and time already exists`, 409);
 
- 
-
-
-    const schedule = await scheduleRepository.createQueryBuilder()
+    await scheduleRepository.createQueryBuilder()
         .insert()
         .into(Schedule)
         .values({
