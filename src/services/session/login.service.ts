@@ -9,7 +9,7 @@ export async function login(payload: iLogin): Promise<iToken> {
     const userRepository: iUserRepo = AppDataSource.getRepository(User);
 
     const findUser: User | null = await userRepository.findOneBy({ email: payload.email });
-    //Ficar esperto com o usuário deletado
+
     if(!findUser) throw new AppError(`Invalid credentials`, 401);
 
     const pwdMatch: boolean = await compare(payload.password, findUser.password);

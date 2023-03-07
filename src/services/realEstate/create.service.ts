@@ -27,5 +27,5 @@ export async function create(payload: iRealEstateCreate): Promise<RealEstate> {
     realEstate.address = address;
     await realEstateRepository.save(realEstate);
 
-    return realEstate; //Talvez precise tratar o retorno
+    return realEstate; 
 }

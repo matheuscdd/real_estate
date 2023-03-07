@@ -24,10 +24,6 @@ export class Schedule {
     @ManyToOne(() => RealEstate, (realEstate) => realEstate.schedules)
     realEstate: RealEstate;
 
-    // @ManyToOne(() => RealEstate)
-    // @JoinTable()
-    // realEstate: RealEstate;
-
     @ManyToOne(() => User)
     @JoinTable()
     user: User;

@@ -14,7 +14,5 @@ export async function find(id: number)/*: Promise<RealEstate[]> */{
         }
     });
 
-    //Talvez ter de fazer uma validação aqui
-
     return results;
 }
