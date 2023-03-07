@@ -4,7 +4,7 @@ import { AppError } from "../../errors";
 import { iRealEstateRepo } from "../../interfaces";
 import schemas from "../../schemas";
 
-export async function find(id: number) {
+export async function find(id: number): Promise<RealEstate> {
     const realEstateRepository: iRealEstateRepo = AppDataSource.getRepository(RealEstate);
 
     const realEstate = await realEstateRepository.findOne({
